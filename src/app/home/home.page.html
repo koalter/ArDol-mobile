@@ -1,20 +1,51 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content class="d-flex align-items-center" [fullscreen]="true">
+  <div id="container" class="form-signin">
+    <div class="text-center mb-4">
+        <h1 class="h3 mb-3 font-weight-bold">
+            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-cash-stack" fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg">
+                <path d="M14 3H1a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1h-1z" />
+                <path fill-rule="evenodd"
+                    d="M15 5H1v8h14V5zM1 4a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1H1z" />
+                <path
+                    d="M13 5a2 2 0 0 0 2 2V5h-2zM3 5a2 2 0 0 1-2 2V5h2zm10 8a2 2 0 0 1 2-2v2h-2zM3 13a2 2 0 0 0-2-2v2h2zm7-4a2 2 0 1 1-4 0 2 2 0 0 1 4 0z" />
+            </svg> {{title}}</h1>
+        <h2 class="h4 mb-3 font-weight-normal">Calculadora de dolares en Argentina</h2>
+    </div>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+    <div class="d-flex justify-content-around">
+        <ion-button *ngIf="country != 'US'" (click)="cambiarModo('US')">Dolares a Pesos</ion-button>
+        <ion-button *ngIf="country != 'AR'" (click)="cambiarModo('AR')">Pesos a Dolares</ion-button>
+    </div>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+    <div class="d-flex justify-content-center mt-3">
+      <div *ngIf="start">
+        <div class="text-center mb-4">
+            <h2 class="h5 mb-3 font-weight-bold">{{this.txtCriterio}}</h2>
+        </div>
+        <div class="form-label-group">
+            <input type="number" class="form-control" placeholder="Ingrese el monto (US$)" [(ngModel)]="valor"
+                required autofocus>
+            <label>Ingrese el monto ({{this.country}}$)</label>
+        </div>
+    
+        <button class="btn btn-lg btn-primary btn-block" (click)="convertir()">Convertir</button><br>
+    
+        <div class="form-label-group">
+            <input class="form-control" placeholder="Oficial" [value]="this.dinero.oficial" disabled>
+            <label>Oficial</label>
+        </div>
+    
+        <div class="form-label-group">
+            <input class="form-control" placeholder="Solidario" [value]="this.dinero.solidario" disabled>
+            <label>Solidario</label>
+        </div>
+    
+        <div class="form-label-group">
+            <input class="form-control" placeholder="Blue" [value]="this.dinero.blue" disabled>
+            <label>Blue</label>
+        </div>
+      </div>
+    </div>
   </div>
 </ion-content>
